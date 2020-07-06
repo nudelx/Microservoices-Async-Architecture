@@ -1,0 +1,26 @@
+const { MODULES, EVENT_TYPES } = require('../broker/events')
+const route = require('./route')
+
+const run = function(SE) {
+  SE.on(MODULES.SERVICE, async (e) => {
+    const { event, data } = e
+    try {
+      const res = route[event] ? await route[event](data) : null
+      res &&
+        SE.emit(MODULES.SERVICE, {
+          data: {
+            msg: `Message stored in SQL id [${res.id}]`,
+            event: EVENT_TYPES.SQL_SAVE,
+            uuid: data.uuid,
+          },
+        })
+    } catch (e) {
+      SE.emit(MODULES.SERVICE, {
+        event: EVENT_TYPES.SQL_FAIL,
+        data: { ...data, msg: e },
+      })
+    }
+  })
+}
+
+module.exports = run
