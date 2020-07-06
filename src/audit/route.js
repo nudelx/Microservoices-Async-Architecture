@@ -19,6 +19,12 @@ const route = {
       ` [${EVENT_TYPES.AUDIT_INFO}]  [${getDate()}] :: ${str ? str : ''} `
     ),
 
+  [EVENT_TYPES.MONGO_SAVE]: (str) =>
+    chalk.blue(' 🔹 ') +
+    chalk.blue(
+      ` [${EVENT_TYPES.AUDIT_INFO}]  [${getDate()}] :: ${str ? str : ''} `
+    ),
+
   [EVENT_TYPES.QUEUE_SUBSCRIPTION]: (str) =>
     chalk.blue(' 🔹 ') +
     chalk.blue(

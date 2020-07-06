@@ -12,6 +12,7 @@ const run = function(SE) {
           data: {
             msg: `Message stored in SQL id [${res.id}]`,
             uuid: data.uuid,
+            original: e,
           },
         })
     } catch (e) {

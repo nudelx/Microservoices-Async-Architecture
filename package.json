@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "chalk": "^4.1.0",
+    "mongoose": "^5.9.21",
     "mysql2": "^2.1.0",
     "nodemon": "^2.0.4",
     "sequelize": "^6.3.0",

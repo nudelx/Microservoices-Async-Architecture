@@ -15,6 +15,9 @@ module.exports = {
     SQL_SAVE: 'SQL_SAVE',
     SQL_FAIL: 'SQL_FAIL',
 
+    MONGO_SAVE: 'MONGO_SAVE',
+    MONGO_FAIL: 'MONGO_FAIL',
+
     QUEUE_SUBSCRIPTION: 'QUEUE_SUBSCRIPTION',
   },
 }
