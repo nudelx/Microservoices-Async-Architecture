@@ -1,32 +1,13 @@
-// const m1 = require('./src/module1')
-// const m2 = require('./src/module2')
-const audit = require('./src/audit')
+const SQL = require('./src/SQL/SQL')
+const audit = require('./src/audit/audit')
 const service = require('./src/service')
-const { MODULES, EVENT_TYPES, SE } = require('./src/events')
+const { MODULES, EVENT_TYPES, init } = require('./src/broker/events')
+const { onMessage } = require('./src/queues/queMessageResolvers')
+const SE = init([audit, SQL])
+const destination = 'SERVICES/POC'
 
-const { v4: uuidv4 } = require('uuid')
-uuidv4()
-audit(SE)
-//////////////
-
-const onMessage = function(args) {
-  const { error, body, client, message } = args
-  if (error) {
-    SE.emit(MODULES.AUDIT, 'Queue module error')
-  }
-
-  SE.emit(MODULES.AUDIT, {
-    event: EVENT_TYPES.AUDIT_INFO,
-    data: 'Message received',
-  })
-
-  client.ack(message)
-  console.log('Message: ', body)
-}
-
-///////////////////////////////
-SE.emit(MODULES.AUDIT, {
+SE.emit(MODULES.SERVICE, {
   event: EVENT_TYPES.AUDIT_START,
-  data: 'Starting the service',
+  data: { msg: 'Starting the service' },
 })
-service.init().subscribe({ destination: 'SERVICES/POC', onMessage })
+service.init().subscribe({ destination, onMessage })

@@ -5,7 +5,9 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.0",
+    "mysql2": "^2.1.0",
     "nodemon": "^2.0.4",
+    "sequelize": "^6.3.0",
     "stompit": "^1.0.0",
     "uuid": "^8.2.0",
     "yargs": "^15.4.0"

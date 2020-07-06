@@ -28,7 +28,7 @@ const service = {
       }
 
       client.on('error', function(error) {
-        console.error('This is error', error)
+        // console.error('This is error', error)
         reconnect()
       })
 
@@ -45,7 +45,7 @@ const service = {
 
       client.subscribe(subscribeHeaders, function(error, message) {
         if (error) {
-          console.log('subscribe error ' + error.message)
+          // console.log('subscribe error ' + error.message)
           return
         }
 
