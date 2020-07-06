@@ -7,6 +7,7 @@ const log = function(myEmitter) {
       event,
       data: { msg, uuid },
     } = e
+
     route[event]
       ? console.log(route[event](`${msg} ${uuid ? ':' + uuid : ''}`))
       : null

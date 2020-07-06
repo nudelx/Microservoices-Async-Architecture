@@ -8,9 +8,9 @@ const run = function(SE) {
       const res = route[event] ? await route[event](data) : null
       res &&
         SE.emit(MODULES.SERVICE, {
+          event: EVENT_TYPES.SQL_SAVE,
           data: {
             msg: `Message stored in SQL id [${res.id}]`,
-            event: EVENT_TYPES.SQL_SAVE,
             uuid: data.uuid,
           },
         })

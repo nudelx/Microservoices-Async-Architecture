@@ -14,5 +14,7 @@ module.exports = {
 
     SQL_SAVE: 'SQL_SAVE',
     SQL_FAIL: 'SQL_FAIL',
+
+    QUEUE_SUBSCRIPTION: 'QUEUE_SUBSCRIPTION',
   },
 }

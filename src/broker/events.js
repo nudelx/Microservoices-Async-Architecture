@@ -1,7 +1,6 @@
 const EventEmitter = require('events')
 const { MODULES, EVENT_TYPES } = require('./eventTypes')
-
-module.exports = {
+const Broker = {
   MODULES,
   EVENT_TYPES,
   init(modules = []) {
@@ -12,10 +11,10 @@ module.exports = {
     return this.SE
   },
 
-  LOG_ERROR() {
+  logError() {
     console.error(`Unrecognised event ${JSON.stringify(e)}`)
   },
-  GET_DATE() {
+  getDate() {
     const today = new Date()
     const date =
       today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
@@ -24,3 +23,4 @@ module.exports = {
     return date + ' ' + time
   },
 }
+module.exports = Broker

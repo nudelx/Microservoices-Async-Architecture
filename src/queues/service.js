@@ -12,14 +12,23 @@ const service = {
     },
   },
 
-  init() {
+  init(broker) {
     this.manager = new stompit.ConnectFailover([this.connectOptions], {
       maxReconnects: 10,
     })
+    this.Broker = broker
     return this
   },
 
+  emitMsg(destination) {
+    this.Broker.SE.emit(this.Broker.MODULES.SERVICE, {
+      event: this.Broker.EVENT_TYPES.QUEUE_SUBSCRIPTION,
+      data: { msg: `subscribe on ${destination}` },
+    })
+  },
+
   subscribe({ destination, onMessage }) {
+    this.emitMsg(destination)
     this.manager.connect(function(error, client, reconnect) {
       if (error) {
         // console.log('connect error ' + error.message)

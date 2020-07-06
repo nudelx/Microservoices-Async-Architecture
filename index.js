@@ -1,13 +1,14 @@
 const SQL = require('./src/SQL/SQL')
-const audit = require('./src/audit/audit')
-const service = require('./src/service')
-const { MODULES, EVENT_TYPES, init } = require('./src/broker/events')
+const Audit = require('./src/audit/audit')
+const Service = require('./src/queues/service')
+const Broker = require('./src/broker/events')
 const { onMessage } = require('./src/queues/queMessageResolvers')
-const SE = init([audit, SQL])
 const destination = 'SERVICES/POC'
+const { MODULES, EVENT_TYPES } = Broker
 
-SE.emit(MODULES.SERVICE, {
+Broker.init([Audit, SQL]).emit(MODULES.SERVICE, {
   event: EVENT_TYPES.AUDIT_START,
-  data: { msg: 'Starting the service' },
+  data: { msg: 'starting the service' },
 })
-service.init().subscribe({ destination, onMessage })
+const onMessageWithBroker = onMessage(Broker.SE)
+Service.init(Broker).subscribe({ destination, onMessage: onMessageWithBroker })

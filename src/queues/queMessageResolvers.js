@@ -6,7 +6,7 @@ const printMessage = (body) => {
   console.log('**********************')
 }
 
-const onMessage = function(args) {
+const onMessage = (SE) => (args) => {
   const { error, body, client, message } = args
   if (error) {
     SE.emit(MODULES.SERVICE, { data: { msg: 'Queue module error' } })
@@ -17,7 +17,7 @@ const onMessage = function(args) {
     data: { msg: 'Message received', body, uuid: uuidv4() },
   })
 
-  printMessage(body)
+  // printMessage(body)
   client.ack(message)
 }
 
