@@ -42,6 +42,14 @@ const route = {
     chalk.red(
       ` [${EVENT_TYPES.SQL_FAIL}]  [${getDate()}] :: ${str ? str : ''} `
     ),
+
+  [EVENT_TYPES.SERVICE_TRANSACTION_ROLLBACK]: (str) =>
+    chalk.red(' 🔴 ') +
+    chalk.red(
+      ` [${EVENT_TYPES.SERVICE_TRANSACTION_ROLLBACK}]  [${getDate()}] :: ${
+        str ? str : ''
+      } `
+    ),
 }
 
 module.exports = route
