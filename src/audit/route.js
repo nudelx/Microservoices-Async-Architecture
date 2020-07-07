@@ -50,6 +50,14 @@ const route = {
         str ? str : ''
       } `
     ),
+
+  [EVENT_TYPES.SERVICE_TRANSACTION_COMPLETE]: (str) =>
+    chalk.green(' 🟢 ') +
+    chalk.green(
+      ` [${EVENT_TYPES.SERVICE_TRANSACTION_ROLLBACK}]  [${getDate()}] :: ${
+        str ? str : ''
+      } `
+    ),
 }
 
 module.exports = route

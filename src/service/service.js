@@ -18,6 +18,7 @@ const service = {
       maxReconnects: 10,
     })
     this.Broker = broker
+
     broker.SE.on(MODULES.SERVICE, (e) => {
       const { event, data } = e
       const regex = RegExp('fail', 'i')
@@ -28,6 +29,7 @@ const service = {
         })
       }
     })
+
     return this
   },
 
@@ -39,6 +41,7 @@ const service = {
   },
 
   subscribe({ destination, onMessage }) {
+    const self = this
     this.emitMsg(destination)
     this.manager.connect(function(error, client, reconnect) {
       if (error) {
@@ -46,6 +49,21 @@ const service = {
         reconnect()
         // return
       }
+
+      self.Broker.SE.on(MODULES.SERVICE, (e) => {
+        const { event } = e
+        if (event === EVENT_TYPES.SERVICE_TRANSACTION_COMPLETE) {
+          const {
+            data: {
+              original: {
+                data: { queMessage },
+              },
+            },
+          } = e
+
+          client.ack(queMessage)
+        }
+      })
 
       client.on('error', function(error) {
         // console.error('This is error', error)

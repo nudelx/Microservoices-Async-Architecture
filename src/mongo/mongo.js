@@ -27,8 +27,17 @@ const run = function(SE) {
         SE.emit(MODULES.SERVICE, {
           event: EVENT_TYPES.MONGO_SAVE,
           data: {
+            ...data,
             msg: `Message stored in MONGO id [${res._id}]`,
-            uuid: data.uuid,
+          },
+        })
+
+      res &&
+        SE.emit(MODULES.SERVICE, {
+          event: EVENT_TYPES.SERVICE_TRANSACTION_COMPLETE,
+          data: {
+            ...data,
+            msg: `Transaction complete, message acknowledged `,
           },
         })
     } catch (e) {

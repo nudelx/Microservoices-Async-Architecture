@@ -14,13 +14,18 @@ const onMessage = (SE) => (args) => {
 
   SE.emit(MODULES.SERVICE, {
     event: EVENT_TYPES.SERVICE_MESSAGE_RECEIVED,
-    data: { msg: 'Message received', body, uuid: uuidv4() },
+    data: {
+      msg: 'Message received',
+      body,
+      uuid: uuidv4(),
+      queMessage: message,
+    },
   })
 
   // SERVICE_TRANSACTION_ROLLBACK
 
   // printMessage(body)
-  client.ack(message)
+  // client.ack(message)
 }
 
 module.exports = {
