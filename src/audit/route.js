@@ -54,7 +54,7 @@ const route = {
   [EVENT_TYPES.SERVICE_TRANSACTION_COMPLETE]: (str) =>
     chalk.green(' 🟢 ') +
     chalk.green(
-      ` [${EVENT_TYPES.SERVICE_TRANSACTION_ROLLBACK}]  [${getDate()}] :: ${
+      ` [${EVENT_TYPES.SERVICE_TRANSACTION_COMPLETE}]  [${getDate()}] :: ${
         str ? str : ''
       } `
     ),
