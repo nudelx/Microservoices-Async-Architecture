@@ -3,10 +3,14 @@ const Messages = require('./model')
 const route = {
   [EVENT_TYPES.SQL_SAVE]: (e) => {
     try {
-      const { original } = e
+      const {
+        original: {
+          data: { uuid, body },
+        },
+      } = e
       const Message = new Messages({
-        uuid: original.data.uuid,
-        text: original.data.body,
+        uuid,
+        text: body,
       })
       return Message.save()
     } catch (e) {
