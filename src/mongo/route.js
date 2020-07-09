@@ -4,9 +4,7 @@ const route = {
   [EVENT_TYPES.SQL_SAVE]: (e) => {
     try {
       const {
-        original: {
-          data: { uuid, body },
-        },
+        original: { uuid, body },
       } = e
       const Message = new Messages({
         uuid,

@@ -45,28 +45,24 @@ const service = {
     this.emitMsg(destination)
     this.manager.connect(function(error, client, reconnect) {
       if (error) {
-        // console.log('connect error ' + error.message)
+        console.log('connect error ' + error.message)
         reconnect()
-        // return
+        return
       }
 
       self.Broker.SE.on(MODULES.SERVICE, (e) => {
-        const { event } = e
+        const { event, data } = e
         if (event === EVENT_TYPES.SERVICE_TRANSACTION_COMPLETE) {
           const {
-            data: {
-              original: {
-                data: { queMessage },
-              },
-            },
-          } = e
+            original: { queMessage },
+          } = data
 
           client.ack(queMessage)
         }
       })
 
       client.on('error', function(error) {
-        // console.error('This is error', error)
+        console.error('This is error', error)
         reconnect()
       })
 
@@ -83,7 +79,7 @@ const service = {
 
       client.subscribe(subscribeHeaders, function(error, message) {
         if (error) {
-          // console.log('subscribe error ' + error.message)
+          console.log('subscribe error ' + error.message)
           return
         }
 

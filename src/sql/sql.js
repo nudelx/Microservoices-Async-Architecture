@@ -6,13 +6,14 @@ const run = function(SE) {
     const { event, data } = e
     try {
       const res = route[event] ? await route[event](data) : null
+      console.log(e)
       res &&
         SE.emit(MODULES.SERVICE, {
           event: EVENT_TYPES.SQL_SAVE,
           data: {
             msg: `Message stored in SQL id [${res.id}]`,
             uuid: data.uuid,
-            original: e,
+            original: { ...e.data },
           },
         })
     } catch (e) {
