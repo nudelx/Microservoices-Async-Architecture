@@ -6,7 +6,6 @@ const run = function(SE) {
     const { event, data } = e
     try {
       const res = route[event] ? await route[event](data) : null
-      console.log(e)
       res &&
         SE.emit(MODULES.SERVICE, {
           event: EVENT_TYPES.SQL_SAVE,

@@ -57,7 +57,9 @@ const service = {
             original: { queMessage },
           } = data
 
-          client.ack(queMessage)
+          queMessage
+            ? client.ack(queMessage)
+            : console.log('ERROR ON QUEUE MSG')
         }
       })
 
@@ -79,8 +81,8 @@ const service = {
 
       client.subscribe(subscribeHeaders, function(error, message) {
         if (error) {
-          console.log('subscribe error ' + error.message)
-          return
+          console.log('subscribe error ' + error.message, 'Reconnection')
+          reconnect()
         }
 
         message.readString('utf-8', function(error, body) {

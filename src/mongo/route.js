@@ -15,6 +15,15 @@ const route = {
       throw 'MONGO FAILED: ' + e
     }
   },
+
+  [EVENT_TYPES.SERVICE_TRANSACTION_ROLLBACK]: async ({ uuid }) => {
+    try {
+      Messages.deleteOne({ uuid }, function(err) {})
+      return null
+    } catch (e) {
+      throw 'MONGO FAILED: ' + e
+    }
+  },
 }
 
 module.exports = route

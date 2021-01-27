@@ -1,8 +1,9 @@
 const route = require('./route')
 const { MODULES } = require('../broker/events')
 
-const log = function(myEmitter) {
-  myEmitter.on(MODULES.SERVICE, (e) => {
+const log = function(SE) {
+  SE.on(MODULES.SERVICE, (e) => {
+    // console.log(e)
     const {
       event,
       data: { msg, uuid },

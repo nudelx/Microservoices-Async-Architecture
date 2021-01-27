@@ -9,6 +9,19 @@ const route = {
       throw 'SQL FAILED: ' + e
     }
   },
+
+  [EVENT_TYPES.SERVICE_TRANSACTION_ROLLBACK]: async ({ uuid }) => {
+    try {
+      const res = await Messages.destroy({
+        where: {
+          uuid,
+        },
+      })
+      return null
+    } catch (e) {
+      throw 'SQL FAILED: ' + e
+    }
+  },
 }
 
 module.exports = route

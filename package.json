@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "clear && node index.js"
+    "start": "clear && ./node_modules/nodemon/bin/nodemon.js index.js"
   },
   "dependencies": {
     "chalk": "^4.1.0",
